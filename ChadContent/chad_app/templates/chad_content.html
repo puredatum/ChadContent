@@ -1,111 +1,157 @@
 {% extends "base.html" %} 
 
 
-{% block title %}Chad Blog{% endblock %}
+{% block title %}AI Chad: Generate Content{% endblock %}
 
 
 {% block content%}
 <br>
-<h1 class="display-1 text-center" align="center">Chad Content</h1>
+<h1 class="display-1">Generate Content</h1>
 <hr>
-<h2 class="display-2 text-center" align="center">Write Content</h2>
-<div>
-    <form method="post" action="/chad_content">
-        <div class="mb-3">
-        <h5>Topic</h5>
-            <div class="input-group mb-3">
-            <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Topic</span>
-            </div>
-            <input name="topic" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
 
-            <h5>Keywords</h5>
-
-               <div class="form-group">
-                  <input type="text" class="form-control" list="select-list-id" name="keywords"/>
-               </div>
-               <datalist id="select-list-id" name="keywords">
-                {% for keys in user.keyword_list %}
-                    <option value="{{keys.keywords}}">{{keys.keywords}}</option>
-                {% endfor %}
-               </datalist>
-
-
-            <br>
-
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="content_type" id="flexRadioDefault1", value="intro">
-              <label class="form-check-label" for="flexRadioDefault1">
-                Introduction
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="content_type" id="flexRadioDefault2", value="para", checked>
-              <label class="form-check-label" for="flexRadioDefault2">
-                Paragraph
-              </label>
-            </div>         
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="content_type" id="flexRadioDefault2", value="headings", checked>
-              <label class="form-check-label" for="flexRadioDefault2">
-                Headings
-              </label>
-            </div>  
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="content_type" id="flexRadioDefault2", value="tweet", checked>
-              <label class="form-check-label" for="flexRadioDefault2">
-                Tweet
-              </label>
-            </div>  
-
-            <br>
-            <button class="btn btn-secondary" type="submit", name="button", value="gen_para">Generate Content</button>
-        </div>
-    </form>
+<div class="card card-body">
+    <h2 class="display-2">Content Types</h2>
+    <br>
+    <p>
+    <a class="btn btn-secondary" data-bs-toggle="collapse" href="#WriteContent" role="button" aria-expanded="false" aria-controls="WriteContent QuestionContent">
+        Write Content
+    </a>
+    <a class="btn btn-secondary" data-bs-toggle="collapse" href="#QuestionContent" role="button" aria-expanded="false" aria-controls="QuestionContent WriteContent">
+        Answer Question
+    </a>
+    </p>
 </div>
-<hr>
-<h2 class="display-2 text-center" align="center">Question Content</h2>
 
-    <form method="post" action="/chad_content">
-        <div class="mb-3">
-        <h5>Question</h5>
-            <div class="input-group mb-3">
-            <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Question</span>
-            </div>
-            <input name="question" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
+<br>
 
-            <h5>Keywords</h5>
-
-               <div class="form-group">
-                  <input type="text" class="form-control" list="select-list-id" name="keywords"/>
-               </div>
-               <datalist id="select-list-id" name="keywords">
-                {% for keys in user.keyword_list %}
-                    <option value="{{keys.keywords}}">{{keys.keywords}}</option>
-                {% endfor %}
-               </datalist>
-            <br>
-            <br>
-            <button class="btn btn-secondary" type="submit", name="button", value="gen_question">Generate Response</button>
+<div class="collapse" id="WriteContent">
+<div class="card card-body">
+<h2 class="display-2">Write Content</h2>
+<form method="post" action="/chad_content">
+    <div class="mb-3">
+        <h5 class="display-5">Topic</h5>
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Topic</span>
         </div>
-    </form>
-    <form method="post" action="/chad_content">
-        <div class="mb-3">
-                {% if response != "" %}
-                    <hr>
-                    <h2 class="display-2 text-center" align="center">Last Query</h2>
-                    <p>Prompt: {{prompt}}</p>
-                    <h5 class="display-5 text-center" align="center">Last Response</h5>
-                    <textarea class="form-control" name="tweet_details" rows=20 cols=80>{{response}}</textarea>
-                    <button class="btn btn-secondary" type="submit", name="button", value="make_tweet">Make Tweet</button>
-                    <button class="btn btn-secondary" type="submit", name="button", value="save_response">Save Response</button>
-                    <button class="btn btn-secondary" type="submit", name="button", value="regen">Regenerate</button>
-                {% endif %}
-    </form>
+            <input name="topic" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
 
+        <h5 class="display-5">Keywords</h5>
+        <div class="form-group">
+            <input type="text" class="form-control" list="select-list-id" name="keywords"/>
+        </div>
+        <datalist id="select-list-id" name="keywords">
+            {% for keys in user.keyword_list %}
+                <option value="{{keys.keywords}}">{{keys.keywords}}</option>
+            {% endfor %}
+        </datalist>
 
+        <br>
+
+        <h5 class="display-5">Content Type</h5>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="content_type" id="flexRadioDefault2", value="headings">
+            <label class="form-check-label" for="flexRadioDefault2">
+                Blog Headings
+            </label>
+        </div>  
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="content_type" id="flexRadioDefault1", value="intro">
+            <label class="form-check-label" for="flexRadioDefault1">
+                Introduction Paragraph
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="content_type" id="flexRadioDefault2", value="para">
+            <label class="form-check-label" for="flexRadioDefault2">
+                Topic Paragraph
+            </label>
+        </div>         
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="content_type" id="flexRadioDefault2", value="tweet">
+            <label class="form-check-label" for="flexRadioDefault2">
+                Tweet
+            </label>
+        </div>  
+
+        <br>
+        <button class="btn btn-secondary" type="submit", name="button", value="gen_para">Generate Content</button>
+    </div>
+</form>
+</div>
+<br>
+</div>
+
+<div class="collapse" id="QuestionContent">
+<div class="card card-body">
+<h2 class="display-2">Answer Question</h2>
+<form method="post" action="/chad_content">
+    <div class="mb-3">
+        <h5 class="display-5">Question</h5>
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Question</span>
+        </div>
+            <input name="question" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+
+        <h5 class="display-5">Keywords</h5>
+        <div class="form-group">
+            <input type="text" class="form-control" list="select-list-id" name="q_keywords"/>
+        </div>
+        <datalist id="select-list-id">
+            {% for keys in user.keyword_list %}
+                <option value="{{keys.keywords}}">{{keys.keywords}}</option>
+            {% endfor %}
+        </datalist>
+        
+        <br>
+
+        <h5 class="display-5">Content Length</h5>
+        
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="question_size" id="flexRadioDefault2", value="long">
+            <label class="form-check-label" for="flexRadioDefault2">
+                Long Form
+            </label>
+        </div>  
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="question_size" id="flexRadioDefault1", value="1">
+            <label class="form-check-label" for="flexRadioDefault1">
+                1 Sentence
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="question_size" id="flexRadioDefault2", value="3">
+            <label class="form-check-label" for="flexRadioDefault2">
+                3 Sentences
+            </label>
+        </div>         
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="question_size" id="flexRadioDefault2", value="6">
+            <label class="form-check-label" for="flexRadioDefault2">
+                6 Sentences
+            </label>
+        </div>  
+
+        <br>
+
+        <button class="btn btn-secondary" type="submit", name="button", value="gen_question">Generate Response</button>
+    </div>
+</form>
+</div>
+<br>
+</div>
+
+<div class="mb-3 card card-body">
+<form method="post" action="/chad_content">
+    {% if response != "" %}
+        <h2 class="display-2">Last Response</h2>
+        <p><b>Prompt:</b><br>{{prompt}}</p>
+        <p><b>Response:</b><br>{{response}}</p>
+    {% endif %}
+</form>
 </div>
 {% endblock %}

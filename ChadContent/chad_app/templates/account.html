@@ -6,23 +6,23 @@
 
 {% block content%}
 <br>
-<h1 class="display-1 text-center" align="center">Account Details</h1>
+<h1 class="display-1">Account Details</h1>
 <hr>
 
 <form method="post" action="/account">
-    <h5>Keywords</h5>
+    <h5 class="display-5">Keywords</h5>
     <div class="mb-3">
     <div class="input-group mb-3">
-    <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">Keywords</span>
-    </div>
-    <input name="keywords" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Keywords</span>
+        </div>
+        <input name="keywords" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
     </div>
     </div>
     <select class="form-select" aria-label="Default select example", name="select_keywords">
-            {% for keys in user.keyword_list %}
-                <option value="{{keys.id}}">{{keys.keywords}}</option>
-            {% endfor %}
+        {% for keys in user.keyword_list %}
+            <option value="{{keys.id}}">{{keys.keywords}}</option>
+        {% endfor %}
     </select>
     <br>
     <button class="btn btn-secondary" type="submit", name="button", value="add_keyword">Add Keywords</button>
@@ -32,21 +32,21 @@
 <hr>
 
 <form method="post" action="/account">
-    <h5>Content Options</h5>
+    <h5 class="display-5">Content Options</h5>
     <p>Current Brand Voice: {{user.brand_voice}}</p>
     <div class="mb-3">
     <div class="input-group mb-3">
-    <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">Brand Voice</span>
-    </div>
-    <input name="brand_voice" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Brand Voice</span>
+        </div>
+        <input name="brand_voice" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
     </div>
     </div>
     <button class="btn btn-secondary" type="submit", name="button", value="add_voice">Add Voice</button>
 </form>
 <hr>
 
-    <h5>Add API Details</h5>
+    <h5 class="display-5">Add API Details</h5>
     <form method="post" action="/account">
         <input class="form-control" type="password" name="api_key" placeholder="API Key"><br>
         <input class="form-control" type="password" name="org_id" placeholder="Org ID"><br>

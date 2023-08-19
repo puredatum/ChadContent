@@ -1,0 +1,79 @@
+{% extends "base.html" %} 
+
+
+{% block title %}AI Chad: Edit Content{% endblock %}
+
+
+{% block content%}
+<br>
+<h1 class="display-1">Edit Content</h1>
+<hr>
+<div class="mb-3 card card-body">
+    <form method="post" action="/edit_last">
+        <div class="mb-3">
+            {% if response != "" %}
+                <h2 class="display-2">Last Query</h2>
+                <p><b>Prompt:</b>   <br>{{prompt}}</p>
+                <p><b>Response:</b></p>
+                <textarea class="form-control" name="response_new" rows=10>{{response}}</textarea>
+                <br>
+            {% endif %}
+        </div>
+</div>
+
+<div class="mb-3 card card-body">
+        <div class="mb-3">
+            <h2 class="display-2">Regenerate Response</h2>
+            {% if response != "" %}
+                <h3 class="display-3">Add keywords</h3>
+                <div class="form-group">
+                    <input type="text" class="form-control" list="select-list-id" name="new_keywords" value="">
+                </div>
+                <datalist id="select-list-id">
+                    {% for keys in user.keyword_list %}
+                        <option value="{{keys.keywords}}">{{keys.keywords}}</option>
+                    {% endfor %}
+                </datalist>
+
+                <h3 class="display-3">Change length</h3> 
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="new_length" id="flexRadioDefault1", value="", checked="checked">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Default
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="new_length" id="flexRadioDefault1", value="1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        1 Sentence
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="new_length" id="flexRadioDefault2", value="3">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        3 Sentences
+                    </label>
+                </div>         
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="new_length" id="flexRadioDefault2", value="6">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        6 Sentences
+                    </label>
+                </div> 
+
+                <h3 class="display-3">Additional Prompt</h3>
+                <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Additional Prompt</span>
+                </div>
+                    <input name="add_prompt" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" value="">
+                </div>
+
+                <br>
+                <button class="btn btn-secondary" type="submit", name="button", value="regen">Regenerate</button>
+                <br>
+            {% endif %}
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -20,20 +20,35 @@ class OpenAIGPT:
         self._openai.api_key = api_key
 
     # Make a chat request
-    def make_paragraph(self, topic: str, keywords: str, brand_voice: str, content_type: str):
+    def post_functions(self, topic: str, keywords: str, brand_voice: str, content_type: str):
         if content_type == "intro":
-            quote_prompt = [
-                {"role": "user","content": f"You using the voice styles of '{brand_voice}' while using the keywords '{keywords}'' about a topic. Write the introduction paragraph of a blog post on `{topic}` that is 3-5 sentences long"
-                }]
+            if keywords != "":
+                quote_prompt = [
+                    {"role": "user","content": f"You using the voice styles of '{brand_voice}' while using the keywords '{keywords}'' about a topic. Write the introduction paragraph of a blog post on `{topic}` that is 3-5 sentences long"
+                    }]
+            else:
+                quote_prompt = [
+                    {"role": "user","content": f"You using the voice styles of '{brand_voice}'. Write the introduction paragraph of a blog post on `{topic}` that is 3-5 sentences long"
+                    }]
         elif content_type == "para":
-            quote_prompt = [
-                {"role": "user","content": f"You using the voice styles of '{brand_voice}' while using the keywords '{keywords}'' about a topic. Write 1 paragraph on `{topic}` that is 3-5 sentences long"
-                }]
+            if keywords != "":
+                quote_prompt = [
+                    {"role": "user","content": f"You using the voice styles of '{brand_voice}' while using the keywords '{keywords}'' about a topic. Write 1 paragraph on `{topic}` that is 3-5 sentences long"
+                    }]
+            else:
+                quote_prompt = [
+                    {"role": "user","content": f"You using the voice styles of '{brand_voice}'. Write 1 paragraph on `{topic}` that is 3-5 sentences long"
+                    }]
 
         elif content_type == "tweet":
-            quote_prompt = [
-                {"role": "user","content": f"You using the voice styles of '{brand_voice}' while using the keywords '{keywords}', write a post up to 3 sentences long on `{topic}`."
-                }]
+            if keywords != "":
+                quote_prompt = [
+                    {"role": "user","content": f"You using the voice styles of '{brand_voice}' while using the keywords '{keywords}', write a post up to 3 sentences long on `{topic}`."
+                    }]
+            else:
+                quote_prompt = [
+                    {"role": "user","content": f"You using the voice styles of '{brand_voice}'. Write a post up to 3 sentences long on `{topic}`."
+                    }]
 
         self.last_prompt = quote_prompt
         self.last_response = self._openai.ChatCompletion.create(
@@ -45,10 +60,16 @@ class OpenAIGPT:
 
     # Generate insight for a quote
     def generate_headings(self, content_info: str, keywords: str):
-        headings_prompt = [
-            {"role": "user",
-            "content": f"Provide headings for a blog post on '{content_info}, aiming to include as many {keywords} as you can.'"
-            }]
+        if keywords != "":
+            headings_prompt = [
+                {"role": "user",
+                "content": f"Provide headings for a blog post on '{content_info}, aiming to include as many {keywords} as you can.'"
+                }]
+        else:
+            headings_prompt = [
+                {"role": "user",
+                "content": f"Provide headings for a blog post on '{content_info}.'"
+                }]
 
         self.last_prompt = headings_prompt
         self.last_response_insight = self._openai.ChatCompletion.create(
@@ -58,10 +79,16 @@ class OpenAIGPT:
         return self.last_response, self.last_prompt[0]["content"]
 
     # Generate insight for a quote
-    def regen(self, reword_response):
+    def reword_response(self, input_prompt, keyword_list, new_length, additional_prompt):
+        if keyword_list != "":
+            keyword_list = f"Include the keywords '{keyword_list}'."
+
+        if new_length != "":
+            new_length = f"The response needs to be {new_length} sentences long."
+
         self.last_prompt = [
             {"role": "user",
-            "content": f"Reword the following '{reword_response}.'."
+            "content": f"Rephrase the following '{input_prompt}' with the following criteria. {keyword_list} {new_length} {additional_prompt}'."
             }]
 
         self.last_response = self._openai.ChatCompletion.create(
@@ -71,10 +98,15 @@ class OpenAIGPT:
         return self.last_response, self.last_prompt[0]["content"]
 
     # Make a chat request
-    def answer_question(self, question: str, keywords: str, brand_voice: str):
-        quote_prompt = [
-            {"role": "user","content": f"Answer `{question}?` using the voice of '{brand_voice}' while using the as many of the following words as you can '{keywords}'."
-            }]
+    def answer_question(self, question: str, keywords: str, brand_voice: str, length_response):
+        if keywords != "":
+            quote_prompt = [
+                {"role": "user","content": f" In `{length_response}`, answer `{question}?` using the voice of '{brand_voice}' while using the as many of the following words as you can '{keywords}'."
+                }]
+        else:
+            quote_prompt = [
+                {"role": "user","content": f" In `{length_response}`, answer `{question}?` using the voice of '{brand_voice}'."
+                }]
        
         self.last_prompt = quote_prompt
         self.last_response = self._openai.ChatCompletion.create(

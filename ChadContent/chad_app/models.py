@@ -15,14 +15,15 @@ class User(db.Model, UserMixin):
 
 class ChadResponse(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    chad_prompt = db.Column(db.String())
     chad_response = db.Column(db.String())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
 class APITokens(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    api_key = db.Column(db.String(120), nullable=False)
-    org_id = db.Column(db.String(120), nullable=False)
+    api_key = db.Column(db.String(120))
+    org_id = db.Column(db.String(120))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
