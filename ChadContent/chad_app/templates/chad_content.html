@@ -1,0 +1,111 @@
+{% extends "base.html" %} 
+
+
+{% block title %}Chad Blog{% endblock %}
+
+
+{% block content%}
+<br>
+<h1 class="display-1 text-center" align="center">Chad Content</h1>
+<hr>
+<h2 class="display-2 text-center" align="center">Write Content</h2>
+<div>
+    <form method="post" action="/chad_content">
+        <div class="mb-3">
+        <h5>Topic</h5>
+            <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Topic</span>
+            </div>
+            <input name="topic" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <h5>Keywords</h5>
+
+               <div class="form-group">
+                  <input type="text" class="form-control" list="select-list-id" name="keywords"/>
+               </div>
+               <datalist id="select-list-id" name="keywords">
+                {% for keys in user.keyword_list %}
+                    <option value="{{keys.keywords}}">{{keys.keywords}}</option>
+                {% endfor %}
+               </datalist>
+
+
+            <br>
+
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="content_type" id="flexRadioDefault1", value="intro">
+              <label class="form-check-label" for="flexRadioDefault1">
+                Introduction
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="content_type" id="flexRadioDefault2", value="para", checked>
+              <label class="form-check-label" for="flexRadioDefault2">
+                Paragraph
+              </label>
+            </div>         
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="content_type" id="flexRadioDefault2", value="headings", checked>
+              <label class="form-check-label" for="flexRadioDefault2">
+                Headings
+              </label>
+            </div>  
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="content_type" id="flexRadioDefault2", value="tweet", checked>
+              <label class="form-check-label" for="flexRadioDefault2">
+                Tweet
+              </label>
+            </div>  
+
+            <br>
+            <button class="btn btn-secondary" type="submit", name="button", value="gen_para">Generate Content</button>
+        </div>
+    </form>
+</div>
+<hr>
+<h2 class="display-2 text-center" align="center">Question Content</h2>
+
+    <form method="post" action="/chad_content">
+        <div class="mb-3">
+        <h5>Question</h5>
+            <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Question</span>
+            </div>
+            <input name="question" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <h5>Keywords</h5>
+
+               <div class="form-group">
+                  <input type="text" class="form-control" list="select-list-id" name="keywords"/>
+               </div>
+               <datalist id="select-list-id" name="keywords">
+                {% for keys in user.keyword_list %}
+                    <option value="{{keys.keywords}}">{{keys.keywords}}</option>
+                {% endfor %}
+               </datalist>
+            <br>
+            <br>
+            <button class="btn btn-secondary" type="submit", name="button", value="gen_question">Generate Response</button>
+        </div>
+    </form>
+    <form method="post" action="/chad_content">
+        <div class="mb-3">
+                {% if response != "" %}
+                    <hr>
+                    <h2 class="display-2 text-center" align="center">Last Query</h2>
+                    <p>Prompt: {{prompt}}</p>
+                    <h5 class="display-5 text-center" align="center">Last Response</h5>
+                    <textarea class="form-control" name="tweet_details" rows=20 cols=80>{{response}}</textarea>
+                    <button class="btn btn-secondary" type="submit", name="button", value="make_tweet">Make Tweet</button>
+                    <button class="btn btn-secondary" type="submit", name="button", value="save_response">Save Response</button>
+                    <button class="btn btn-secondary" type="submit", name="button", value="regen">Regenerate</button>
+                {% endif %}
+    </form>
+
+
+</div>
+{% endblock %}
