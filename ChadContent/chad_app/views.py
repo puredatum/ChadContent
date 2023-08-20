@@ -9,18 +9,21 @@ from chad_app.functions.function_file import make_user_api
 views = Blueprint("views", __name__)
 
 
+# Homepage
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
 	return render_template("home.html", user=current_user)
 
 
+# View for saved responses
 @views.route('/saved_responses', methods=['GET', 'POST'])
 @login_required
 def saved_responses():
     display_content = ChadResponse.query.filter_by(user_id=current_user.id).all()
 
     if request.method == 'POST':
+        # Sends the response to the edit page
         if request.form["button"] == "edit_response":
             current_user.last_edit_response = request.form["edit_response_hist"]
             current_user.last_edit_prompt = request.form["edit_prompt_hist"]
@@ -28,20 +31,24 @@ def saved_responses():
             db.session.merge(current_user)
             db.session.commit()
 
+        # Deletes a saved response
         if request.form["button"] == "del_response":
             del_entry = ChadResponse.query.get(request.form["edit_id"])
             db.session.delete(del_entry)
             db.session.commit()
 
-
     return render_template("saved_responses.html", user=current_user, display_content=display_content)
 
 
+# View to edit the most recent response
 @views.route('/edit_last', methods=['GET', 'POST'])
 @login_required
 def edit_last():
     if request.method == "POST":
+
+        # Regenerate a response with specific criteria
         if request.form["button"] == "regen":
+            # Get the API and make the instance
             api_list = APITokens.query.filter_by(user_id=current_user.id).first()
             api_details = [api_list.api_key, api_list.org_id]
             openai_app = make_user_api(api_details)
@@ -52,6 +59,7 @@ def edit_last():
             additional_prompt = request.form['add_prompt']
 
             current_user.last_edit_response, current_user.last_edit_prompt = openai_app.reword_response(
+                current_user.brand_voice,
                 last_response, 
                 keyword_list, 
                 new_length, 
@@ -60,6 +68,7 @@ def edit_last():
             db.session.merge(current_user)
             db.session.commit()
 
+        # Save the response
         if request.form["button"] == "save_response":
             chad_response = request.form["edit_response"]
             chad_prompt = request.form["edit_prompt"]
@@ -70,15 +79,18 @@ def edit_last():
     return render_template("edit_last.html", user=current_user)
 
 
+# View to generate content
 @views.route('/chad_content', methods=['GET', 'POST'])
 @login_required
 def chad_content():
     if request.method == 'POST' and request.form["button"] != "edit_response":
+        # Get the API and make the instance
         api_list = APITokens.query.filter_by(user_id=current_user.id).first()
         api_details = [api_list.api_key, api_list.org_id]
         openai_app = make_user_api(api_details)
 
-        if request.form["button"] == "gen_para":
+        # Generate post content
+        if request.form["button"] == "gen_post":
             topic = request.form['topic']
             keywords = request.form['keywords']
 
@@ -102,6 +114,7 @@ def chad_content():
                 db.session.merge(current_user)
                 db.session.commit()
 
+        # Save a response
         if request.form["button"] == "save_response":
             chad_response = current_user.last_response
             chad_prompt = current_user.last_prompt
@@ -109,9 +122,11 @@ def chad_content():
             db.session.add(new_response)
             db.session.commit()
 
+        # Regenerate a response with specific crieteria
         if request.form["button"] == "regen":
             current_user.last_response, current_user.last_prompt = openai_app.regen(current_user.last_response)
 
+        # Generate a question response
         if request.form["button"] == "gen_question":
             if request.form['question_size'] == "long":
                 length_response = "long form"
@@ -129,40 +144,45 @@ def chad_content():
             db.session.merge(current_user)
             db.session.commit()
 
+    # Send the response to be editted
     if request.method == 'POST' and request.form["button"] == "edit_response":
         current_user.last_edit_response, current_user.last_edit_prompt = current_user.last_response, current_user.last_prompt
         db.session.merge(current_user)
         db.session.commit()
 
-
     return render_template("chad_content.html", user=current_user, response=current_user.last_response, prompt=current_user.last_prompt)
 
 
+# Account view
 @views.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
     if request.method == 'POST':
+        # Add API keys
         if request.form["button"] == "add_api":
+            # Get the API and make the instance
             api_key = request.form['api_key']
             org_id = request.form['org_id']
-
             new_api = APITokens(api_key=api_key, 
                 org_id=org_id, user_id=current_user.id)
 
             db.session.add(new_api)
             db.session.commit()
 
+        # Add brand voice
         if request.form["button"] == "add_voice":
             user_account = User.query.get(current_user.id)
             user_account.brand_voice = request.form['brand_voice']
             db.session.merge(user_account)
             db.session.commit()
 
+        # Add a keyword
         if request.form["button"] == "add_keyword":
             new_keyword = KeywordList(keywords=request.form['keywords'], user_id=current_user.id)
             db.session.add(new_keyword)
             db.session.commit()
 
+        # Delete a keyword
         if request.form["button"] == "del_keyword":
             del_keyword = KeywordList.query.get(request.form["selected_keywords"])
             db.session.delete(del_keyword)
