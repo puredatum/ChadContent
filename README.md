@@ -2,7 +2,8 @@
 
 ## Installation
 1. Clone this repo
-2. Install the requirements from pip
+2. Get your API keys from openai
+3. Install the requirements from pip
  
 ## Setup
 1. Run bash_run.sh
