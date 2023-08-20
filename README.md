@@ -16,6 +16,10 @@
 
 ## Generate Content
 
+![image](https://github.com/theaichad/ChadContent/assets/114192985/ea832494-e15c-40d9-a51c-e4d7a87f098b)
+
+![image](https://github.com/theaichad/ChadContent/assets/114192985/a2f001e8-766a-4dcd-96b4-0c2cd88d61cb)
+
 ## Edit Content
 
 ## Saved Content
