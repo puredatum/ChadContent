@@ -1,0 +1,27 @@
+{% extends "base.html" %} 
+
+
+{% block title %}AI Chad - Saved Responses{% endblock %}
+
+
+{% block content%}
+<br>
+<h1 class="display-1">Saved Responses</h1>
+<hr>
+<div class="mb-3 card card-body">
+	{% for response in display_content %}
+		<form method="post" action="/saved_responses">
+			<p><b>Prompt:</b><br>{{response.chad_prompt}}<p>
+			<p><b>Response:</b><br>{{response.chad_response}}<p>
+
+			<input type="hidden" name="edit_prompt_hist" value="{{response.chad_prompt}}"></input>
+			<input type="hidden" name="edit_response_hist" value="{{response.chad_response}}"></input>
+			<input type="hidden" name="edit_id" value="{{response.id}}"></input>
+			<button class="btn btn-secondary" type="submit", name="button", value="edit_response">Edit Response</button>
+			<button class="btn btn-secondary" type="submit", name="button", value="del_response">Delete Response</button>
+			<hr>
+		</form>
+	{% endfor %}
+</div>
+
+{% endblock %}

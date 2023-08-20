@@ -13,10 +13,13 @@
         <div class="mb-3">
             {% if response != "" %}
                 <h2 class="display-2">Last Query</h2>
-                <p><b>Prompt:</b>   <br>{{prompt}}</p>
+                <p><b>Prompt:</b>   <br>{{current_user.last_edit_prompt}}</p>
                 <p><b>Response:</b></p>
-                <textarea class="form-control" name="response_new" rows=10>{{response}}</textarea>
+                <textarea class="form-control" name="response_new" rows=10>{{current_user.last_edit_response}}</textarea>
                 <br>
+                <input type="hidden" name="edit_prompt" value="{{current_user.last_edit_prompt}}"></input>
+                <input type="hidden" name="edit_response" value="{{current_user.last_edit_response}}"></input>
+                <button class="btn btn-secondary" type="submit", name="button", value="save_response">Save Response</button>
             {% endif %}
         </div>
 </div>

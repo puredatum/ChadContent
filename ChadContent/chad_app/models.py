@@ -9,6 +9,8 @@ class User(db.Model, UserMixin):
     brand_voice = db.Column(db.String(120))
     last_prompt = db.Column(db.String(120))
     last_response = db.Column(db.String(120))
+    last_edit_prompt = db.Column(db.String(120))
+    last_edit_response = db.Column(db.String(120))
     response_list = db.relationship("ChadResponse")
     api_list = db.relationship("APITokens")
     keyword_list = db.relationship("KeywordList")

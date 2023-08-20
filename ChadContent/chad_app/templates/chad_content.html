@@ -149,8 +149,10 @@
 <form method="post" action="/chad_content">
     {% if response != "" %}
         <h2 class="display-2">Last Response</h2>
-        <p><b>Prompt:</b><br>{{prompt}}</p>
+        <p><b>Prompt:</b>{{prompt}}</p>
         <p><b>Response:</b><br>{{response}}</p>
+        <button class="btn btn-secondary" type="submit", name="button", value="save_response">Save Response</button>
+        <button class="btn btn-secondary" type="submit", name="button", value="edit_response">Edit Response</button>
     {% endif %}
 </form>
 </div>
