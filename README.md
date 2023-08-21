@@ -15,7 +15,7 @@
 ![image](https://github.com/theaichad/ChadContent/assets/114192985/3a8b5ca5-4c47-4cbc-bbd3-8504013fdef4)
 
 ## Generate content
-Select what type of content you wish to generate
+Select what type of content you wish to generate:
 
 ### Write Content
 ![image](https://github.com/theaichad/ChadContent/assets/114192985/ea832494-e15c-40d9-a51c-e4d7a87f098b)
@@ -24,6 +24,14 @@ Select what type of content you wish to generate
 ### Answer a question
 ![image](https://github.com/theaichad/ChadContent/assets/114192985/a2f001e8-766a-4dcd-96b4-0c2cd88d61cb)
 
+
+### Manage Responses
+You can save the last response into a database or you can send it to be editted with further prompts
+![image](https://github.com/theaichad/ChadContent/assets/114192985/8c67186a-141d-4b1b-b8c8-3f69f4501c13)
+
+
 ## Edit Content
+![image](https://github.com/theaichad/ChadContent/assets/114192985/f184a9af-31ea-4bba-88ba-160fdd2ce219)
+
 
 ## Saved Content
