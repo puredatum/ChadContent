@@ -105,7 +105,7 @@ def chad_content():
                 db.session.commit()
 
             elif request.form['content_type'] == "headings":
-                current_user.last_response, current_user.last_prompt = openai_app.generate_headings(topic, keywords)
+                current_user.last_response, current_user.last_prompt = openai_app.generate_headings(topic, keywords, current_user.brand_voice)
                 db.session.merge(current_user)
                 db.session.commit()
 
@@ -122,10 +122,6 @@ def chad_content():
             db.session.add(new_response)
             db.session.commit()
 
-        # Regenerate a response with specific crieteria
-        if request.form["button"] == "regen":
-            current_user.last_response, current_user.last_prompt = openai_app.regen(current_user.last_response)
-
         # Generate a question response
         if request.form["button"] == "gen_question":
             if request.form['question_size'] == "long":
@@ -140,7 +136,11 @@ def chad_content():
             question = request.form["question"]
             keywords = request.form['q_keywords']
 
-            current_user.last_response, current_user.last_prompt = openai_app.answer_question(question, keywords, current_user.brand_voice, length_response)
+            current_user.last_response, current_user.last_prompt = openai_app.answer_question(
+                question, 
+                keywords, 
+                current_user.brand_voice, 
+                length_response)
             db.session.merge(current_user)
             db.session.commit()
 

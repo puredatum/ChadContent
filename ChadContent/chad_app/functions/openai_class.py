@@ -52,7 +52,7 @@ class OpenAIGPT:
 
 
     # Generate headings
-    def generate_headings(self, content_info: str, keywords: str):
+    def generate_headings(self, content_info: str, keywords: str, brand_voice: str):
         # Build the prompt strings keywords and voice
         prompt_string = ""
         if brand_voice != "":
@@ -66,7 +66,7 @@ class OpenAIGPT:
             "content": f"{prompt_string} Provide headings for a blog post on '{content_info}."
             }]
 
-        self.last_response_insight = self._openai.ChatCompletion.create(
+        self.last_response = self._openai.ChatCompletion.create(
             model=self._model,
             messages=self.last_prompt)["choices"][0]["message"]["content"]
 
@@ -83,6 +83,8 @@ class OpenAIGPT:
             prompt_string += f"Using as many of these words as possible '{keywords}'."
         if new_length != "":
             prompt_string += f"Make the response {new_length} sentences long."
+        if additional_prompt != "":
+            prompt_string += f"{additional_prompt}"
 
         # Setup prompt
         self.last_prompt = [
@@ -105,8 +107,8 @@ class OpenAIGPT:
             prompt_string += f"You using the voice styles of '{brand_voice}'."
         if keywords != "":
             prompt_string += f"Using as many of these words as possible '{keywords}'."
-        if new_length != "":
-            prompt_string += f"Make the response {new_length} sentences long."
+        if length_response != "":
+            prompt_string += f"Make the response {length_response} sentences long."
 
         # Setup prompt
         self.last_prompt = [
@@ -115,6 +117,6 @@ class OpenAIGPT:
        
         self.last_response = self._openai.ChatCompletion.create(
             model=self._model,
-            messages=quote_prompt)["choices"][0]["message"]["content"]
+            messages=self.last_prompt)["choices"][0]["message"]["content"]
 
         return self.last_response, self.last_prompt[0]["content"]
