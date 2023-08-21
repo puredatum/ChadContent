@@ -35,3 +35,4 @@ You can save the last response into a database or you can send it to be editted 
 
 
 ## Saved Content
+![image](https://github.com/theaichad/ChadContent/assets/114192985/6e0ed8ad-3328-43ff-97e7-0d26eb665ad8)
