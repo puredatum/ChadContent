@@ -3,14 +3,27 @@
 ## Installation
 1. Clone this repo
 2. Get your API keys from openai
-3. Install the requirements from pip
+3. Load you virtual environment in Python
+4. Install the requirements from pip
  
-## Setup
-1. Run bash_run.sh
+## Initial Setup
+1. Run the server with "python3 main.py"
 2. Create your login, this is used to store your account information
 3. Add your OpenAI API keys
 4. Add your brand voice
 5. Add your keywords, this is a list that populates. You can also add them each time in the content generater
+
+## Usage
+1. Follow the setup process in GitHub repo
+2. Setup your band voice and think about your keywords to add in
+3. Pick the type of content you want to write and a topic
+4. Let the AI generate this content
+5. Click "Edit Response" and navigate to the editor page
+6. Edit any of the free text if you need to
+7. Select the other modification criteria
+8. Regenerate the content
+9. Repeat until you are happy
+10. Save the content at any point for later
 
 ![image](https://github.com/theaichad/ChadContent/assets/114192985/3a8b5ca5-4c47-4cbc-bbd3-8504013fdef4)
 
