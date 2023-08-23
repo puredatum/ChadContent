@@ -13,6 +13,8 @@
 4. Add your brand voice
 5. Add your keywords, this is a list that populates. You can also add them each time in the content generater
 
+![image](https://github.com/theaichad/ChadContent/assets/114192985/3a8b5ca5-4c47-4cbc-bbd3-8504013fdef4)
+
 ## Usage
 1. Follow the setup process in GitHub repo
 2. Setup your band voice and think about your keywords to add in
@@ -25,11 +27,8 @@
 9. Repeat until you are happy
 10. Save the content at any point for later
 
-![image](https://github.com/theaichad/ChadContent/assets/114192985/3a8b5ca5-4c47-4cbc-bbd3-8504013fdef4)
 
-## Generate content
-Select what type of content you wish to generate:
-
+## Examples
 ### Write Content
 ![image](https://github.com/theaichad/ChadContent/assets/114192985/ea832494-e15c-40d9-a51c-e4d7a87f098b)
 
