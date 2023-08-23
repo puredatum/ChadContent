@@ -9,9 +9,3 @@ def make_user_api(api_details):
 	openai_app.setup_api(api_details[0], api_details[1])
 
 	return openai_app
-
-
-def quote_insight_gen(twitter_app, openai_app, tweet_quote):
-    new_insight = twitter_app.quote_insight(openai_app, tweet_quote)
-
-    return new_insight

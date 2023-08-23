@@ -1,4 +1,5 @@
 import openai
+import requests
 
 class OpenAIGPT:
     def __init__(self, model="gpt-3.5-turbo"):
@@ -15,7 +16,7 @@ class OpenAIGPT:
         self._openai = openai
 
     # Setup API data
-    def setup_api(self, api_key, org_id):
+    def setup_api(self, api_key: str, org_id: str):
         self._openai.organization = org_id
         self._openai.api_key = api_key
 
@@ -74,7 +75,8 @@ class OpenAIGPT:
 
 
     # Reword a response
-    def reword_response(self, brand_voice, input_prompt, keywords, new_length, additional_prompt):
+    def reword_response(self, brand_voice: str, input_prompt: str, keywords: str, 
+        new_length: str, additional_prompt: str):
         # Build the prompt strings keywords and voice
         prompt_string = ""
         if brand_voice != "":
@@ -100,7 +102,7 @@ class OpenAIGPT:
 
 
     # Answer a question
-    def answer_question(self, question: str, keywords: str, brand_voice: str, length_response):
+    def answer_question(self, question: str, keywords: str, brand_voice: str, length_response: str):
         # Build the prompt strings keywords and voice
         prompt_string = ""
         if brand_voice != "":
@@ -120,3 +122,11 @@ class OpenAIGPT:
             messages=self.last_prompt)["choices"][0]["message"]["content"]
 
         return self.last_response, self.last_prompt[0]["content"]
+
+
+    def make_embedding(self, response_in):
+        model_id = "text-similarity-davinci-001"
+        embedding_response = openai.Embedding.create(input=response_in, model=model_id)
+        embedding_response = embedding_response["data"][0]["embedding"]
+
+        return embedding_response
