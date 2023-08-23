@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
     api_list = db.relationship("APITokens")
     keyword_list = db.relationship("KeywordList")
 
+
 class ChadResponse(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     chad_prompt = db.Column(db.String())

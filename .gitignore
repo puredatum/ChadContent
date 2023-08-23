@@ -2,3 +2,4 @@
 *.env
 .gitattributes
 __pycache__
+*.sh
