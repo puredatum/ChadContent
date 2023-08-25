@@ -6,6 +6,7 @@ from . import db
 import csv
 from chad_app.functions.function_file import make_user_api
 
+
 views = Blueprint("views", __name__)
 
 
@@ -16,10 +17,11 @@ def home():
 	return render_template("home.html", user=current_user)
 
 
-# View for saved responses
+# View for the saved responses
 @views.route('/saved_responses', methods=['GET', 'POST'])
 @login_required
 def saved_responses():
+    # Get the prompt and response data from the database
     display_content = ChadResponse.query.filter_by(user_id=current_user.id).all()
 
     if request.method == 'POST':
@@ -68,7 +70,7 @@ def edit_last():
             db.session.merge(current_user)
             db.session.commit()
 
-        # Save the response
+        # Save the response to the database
         if request.form["button"] == "save_response":
             chad_response = request.form["edit_response"]
             chad_prompt = request.form["edit_prompt"]
@@ -89,26 +91,30 @@ def chad_content():
         api_details = [api_list.api_key, api_list.org_id]
         openai_app = make_user_api(api_details)
 
-        # Generate post content
+        # Generate content
         if request.form["button"] == "gen_post":
             topic = request.form['topic']
             keywords = request.form['keywords']
 
+            # Generate introduction paragraph
             if request.form['content_type'] == "intro":
                 current_user.last_response, current_user.last_prompt = openai_app.post_functions(topic, keywords, current_user.brand_voice, "intro")
                 db.session.merge(current_user)
                 db.session.commit()
 
+             # Generate normal paragraph
             elif request.form['content_type'] == "para":
                 current_user.last_response, current_user.last_prompt = openai_app.post_functions(topic, keywords, current_user.brand_voice, "para")
                 db.session.merge(current_user)
                 db.session.commit()
 
+            # Generate headings
             elif request.form['content_type'] == "headings":
                 current_user.last_response, current_user.last_prompt = openai_app.generate_headings(topic, keywords, current_user.brand_voice)
                 db.session.merge(current_user)
                 db.session.commit()
 
+            # Generate tweet
             elif request.form['content_type'] == "tweet":
                 current_user.last_response, current_user.last_prompt = openai_app.post_functions(topic, keywords, current_user.brand_voice, "tweet")
                 db.session.merge(current_user)

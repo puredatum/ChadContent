@@ -122,11 +122,3 @@ class OpenAIGPT:
             messages=self.last_prompt)["choices"][0]["message"]["content"]
 
         return self.last_response, self.last_prompt[0]["content"]
-
-
-    def make_embedding(self, response_in):
-        model_id = "text-similarity-davinci-001"
-        embedding_response = openai.Embedding.create(input=response_in, model=model_id)
-        embedding_response = embedding_response["data"][0]["embedding"]
-
-        return embedding_response

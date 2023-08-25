@@ -2,6 +2,7 @@ from . import db
 from flask_login import UserMixin
 
 
+# User database class
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=True, nullable=False)
@@ -16,6 +17,7 @@ class User(db.Model, UserMixin):
     keyword_list = db.relationship("KeywordList")
 
 
+# Prompt and response database class
 class ChadResponse(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     chad_prompt = db.Column(db.String())
@@ -23,6 +25,7 @@ class ChadResponse(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
+# API token storage for each user
 class APITokens(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     api_key = db.Column(db.String(120))
@@ -30,6 +33,7 @@ class APITokens(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
+# Database for stored keywords for each user
 class KeywordList(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     keywords = db.Column(db.String())
