@@ -22,10 +22,11 @@
 3. Let the AI generate this content
 4. Click "Edit Response" and navigate to the editor page
 5. Edit any of the free text if you need to
-6. Select the other modifications needed
-7. Regenerate the content
-8. Repeat steps 5-7 until you are happy
-9. Save the content at any point for later
+6. Use the selections to modify your content
+7. Use the free prompting section to add your own prompts
+8. Regenerate the content
+9. Repeat steps 5-7 until you are happy
+10. Save the content at any point for later
 
 
 ## Examples
@@ -38,13 +39,15 @@
 
 
 ### Manage Responses
-You can save the last response into a database or you can send it to be editted with further prompts
+You can save the last response into a database or you can send it to be editted with further prompts.
 ![image](https://github.com/theaichad/ChadContent/assets/114192985/8c67186a-141d-4b1b-b8c8-3f69f4501c13)
 
 
 ## Edit Content
+At this section, you can edit the free text and add prompting through the supplied options, or the free prompt section.
 ![image](https://github.com/theaichad/ChadContent/assets/114192985/f184a9af-31ea-4bba-88ba-160fdd2ce219)
 
 
 ## Saved Content
+You can load saved content into the edit section.
 ![image](https://github.com/theaichad/ChadContent/assets/114192985/6e0ed8ad-3328-43ff-97e7-0d26eb665ad8)
