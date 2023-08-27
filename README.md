@@ -1,4 +1,4 @@
-# ChadContent
+# Chad Content
 
 ## Installation
 1. Clone this repo
