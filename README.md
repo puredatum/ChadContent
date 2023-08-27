@@ -14,7 +14,7 @@
 5. Add your brand voice
 6. Add your keywords, this is a list that populates. You can also add them each time in the content generater
 
-![image](https://github.com/theaichad/ChadContent/assets/114192985/3a8b5ca5-4c47-4cbc-bbd3-8504013fdef4)
+![Screenshot from 2023-08-21 09-47-06](https://github.com/theaichad/ChadContent/assets/114192985/4109566d-a19d-45fa-9959-5c3594059c82)
 
 ## Usage
 1. Follow the setup process in GitHub repo
