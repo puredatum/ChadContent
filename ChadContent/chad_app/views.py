@@ -190,7 +190,7 @@ def account():
 
         # Delete a keyword
         if request.form["button"] == "del_keyword":
-            del_keyword = KeywordList.query.get(request.form["selected_keywords"])
+            del_keyword = KeywordList.query.get(request.form["select_keywords"])
             db.session.delete(del_keyword)
             db.session.commit()
 
