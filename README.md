@@ -31,23 +31,20 @@
 
 ## Examples
 ### Write Content
-![image](https://github.com/theaichad/ChadContent/assets/114192985/ea832494-e15c-40d9-a51c-e4d7a87f098b)
-
+![Screenshot from 2023-08-21 09-56-50](https://github.com/theaichad/ChadContent/assets/114192985/b1c7187a-abdc-4560-b3b0-27e3a5b7c426)
 
 ### Answer a question
-![image](https://github.com/theaichad/ChadContent/assets/114192985/a2f001e8-766a-4dcd-96b4-0c2cd88d61cb)
-
+![Screenshot from 2023-08-21 09-56-24](https://github.com/theaichad/ChadContent/assets/114192985/d7bddde2-1fe5-4a29-aaf9-7a30f5a6e1ea)
 
 ### Manage Responses
 You can save the last response into a database or you can send it to be editted with further prompts.
-![image](https://github.com/theaichad/ChadContent/assets/114192985/8c67186a-141d-4b1b-b8c8-3f69f4501c13)
-
+![Screenshot from 2023-08-21 19-46-01](https://github.com/theaichad/ChadContent/assets/114192985/3327114c-b62d-490c-befc-03cfa7fb7e02)
 
 ## Edit Content
 At this section, you can edit the free text and add prompting through the supplied options, or the free prompt section.
-![image](https://github.com/theaichad/ChadContent/assets/114192985/f184a9af-31ea-4bba-88ba-160fdd2ce219)
-
+![Screenshot from 2023-08-21 09-59-54](https://github.com/theaichad/ChadContent/assets/114192985/60bed909-6665-43fa-8f67-1c2492949be9)
 
 ## Saved Content
 You can load saved content into the edit section.
-![image](https://github.com/theaichad/ChadContent/assets/114192985/6e0ed8ad-3328-43ff-97e7-0d26eb665ad8)
+![Screenshot from 2023-08-21 19-46-01](https://github.com/theaichad/ChadContent/assets/114192985/fd54c89b-cc29-4602-8b15-5ad465fb3c02)
+
